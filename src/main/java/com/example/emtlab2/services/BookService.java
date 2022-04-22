@@ -12,7 +12,7 @@ public interface BookService {
     List<Book> findAll();
     Optional<Book> findById(Long id);
     Optional<Book> edit(Long id, BookDto bookDto);
-    Optional<Book> create(String name, Category category, Long authorId, Integer availableCopies);
+    Optional<Book> create(String name, Category category, Long author, Integer availableCopies);
     Optional<Book> create(BookDto bookDto);
     void deleteBook(Long id);
     void markAsTaken(Long id);

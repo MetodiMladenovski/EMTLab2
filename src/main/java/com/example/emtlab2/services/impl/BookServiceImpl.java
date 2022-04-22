@@ -40,9 +40,9 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Optional<Book> edit(Long id, BookDto bookDto) {
-        Book book = this.bookRepository.findById(bookDto.getId()).orElseThrow(() -> new BookNotFoundException(id));
-        Author author = this.authorRepository.findById(bookDto.getAuthorId())
-                .orElseThrow(() -> new AuthorNotFoundException(bookDto.getAuthorId()));
+        Book book = this.bookRepository.findById(id).orElseThrow(() -> new BookNotFoundException(id));
+        Author author = this.authorRepository.findById(bookDto.getAuthor())
+                .orElseThrow(() -> new AuthorNotFoundException(bookDto.getAuthor()));
         book.setName(bookDto.getName());
         book.setAuthor(author);
         book.setCategory(bookDto.getCategory());
@@ -55,11 +55,11 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
-    public Optional<Book> create(String name, Category category, Long authorId, Integer availableCopies) {
-        Author author = this.authorRepository.findById(authorId)
-                .orElseThrow(() -> new AuthorNotFoundException(authorId));
+    public Optional<Book> create(String name, Category category, Long author, Integer availableCopies) {
+        Author author1 = this.authorRepository.findById(author)
+                .orElseThrow(() -> new AuthorNotFoundException(author));
 
-        Book book = new Book(name, category, author, availableCopies);
+        Book book = new Book(name, category, author1, availableCopies);
         this.bookRepository.delete(book);
 
         return Optional.of(this.bookRepository.save(book));
@@ -67,8 +67,8 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Optional<Book> create(BookDto bookDto) {
-        Author author = this.authorRepository.findById(bookDto.getAuthorId())
-                .orElseThrow(() -> new AuthorNotFoundException(bookDto.getAuthorId()));
+        Author author = this.authorRepository.findById(bookDto.getAuthor())
+                .orElseThrow(() -> new AuthorNotFoundException(bookDto.getAuthor()));
         Book book = new Book(bookDto.getName(), bookDto.getCategory(), author, bookDto.getAvailableCopies());
         this.bookRepository.delete(book);
         return Optional.of(this.bookRepository.save(book));
