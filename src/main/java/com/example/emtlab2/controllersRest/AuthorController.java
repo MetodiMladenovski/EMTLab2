@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:3001"})
+@CrossOrigin(origins = {"https://emt-frontend-181085.herokuapp.com"})
 @RequestMapping("/authors")
 public class AuthorController {
 
