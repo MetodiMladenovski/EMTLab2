@@ -1,11 +1,8 @@
 package com.example.emtlab2.model;
 
 import lombok.Data;
-import lombok.Generated;
-import lombok.Value;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlType;
 
 @Data
 @Entity

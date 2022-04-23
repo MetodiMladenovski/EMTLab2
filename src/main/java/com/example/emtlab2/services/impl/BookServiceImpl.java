@@ -83,11 +83,11 @@ public class BookServiceImpl implements BookService {
     @Override
     public void markAsTaken(Long id) {
         Book book = this.bookRepository.findById(id).orElseThrow(() -> new BookNotFoundException(id));
-        if(book.getAvailableCopies()==0){
+        if (book.getAvailableCopies() == 0) {
             throw new BookNoLongerAvailableException(id);
         }
 
-        int avCopiesToSet = book.getAvailableCopies()-1;
+        int avCopiesToSet = book.getAvailableCopies() - 1;
         book.setAvailableCopies(avCopiesToSet);
         this.bookRepository.save(book);
     }
