@@ -20,8 +20,7 @@ public class Country {
     public Country() {
     }
 
-    public Country(Long id, String name, String continent) {
-        this.id = id;
+    public Country(String name, String continent) {
         this.name = name;
         this.continent = continent;
     }
